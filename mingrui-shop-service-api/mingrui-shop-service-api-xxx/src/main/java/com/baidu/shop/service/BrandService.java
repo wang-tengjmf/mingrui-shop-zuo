@@ -6,12 +6,13 @@ import com.baidu.shop.bto.BrandDTO;
 import com.baidu.shop.entity.BrandEntity;
 import com.baidu.shop.validate.group.MingruiOperation;
 import com.github.pagehelper.PageInfo;
+import com.google.gson.JsonObject;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @ClassName BrandService
@@ -25,9 +26,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface BrandService {
     @ApiOperation(value = "获取品牌信息")
     @GetMapping(value = "brand/getBrandInfo")
-    public Result<PageInfo<BrandEntity>> getBrandInfo(BrandDTO brandDTO);
+    Result<PageInfo<BrandEntity>> getBrandInfo(BrandDTO brandDTO);
 
     @ApiOperation(value = "新增品牌")
     @PostMapping(value = "brand/addBrandInfo")
-    public Result<JSONObject> save(@Validated({MingruiOperation.Add.class})@RequestBody BrandDTO brandDTO);
+    Result<JSONObject> save(@Validated({MingruiOperation.Add.class})@RequestBody BrandDTO brandDTO);
+
+    @PutMapping(value = "brand/save")
+    @ApiOperation(value = "修改品牌信息")
+    Result<JsonObject> editBrand(@Validated({MingruiOperation.Update.class})@RequestBody BrandDTO brandDTO);
+
+    @ApiOperation(value = "删除品牌")
+    @DeleteMapping(value = "brand/delete")
+    Result<JsonObject> deleteBrandInfo(Integer id);
+
+    @GetMapping(value = "brand/getBrandInfoByCategoryId")
+    @ApiOperation(value = "通过id分类查询品牌")
+    Result<List<BrandEntity>> getBrandInfoByCategoryId(Integer cid);
 }

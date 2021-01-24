@@ -31,4 +31,7 @@ public interface CategoryService {
     @ApiOperation(value = "新增分类")
     @PostMapping(value = "category/add")
     public Result<JSONObject> addCategory(@RequestBody CategoryEntity entity);
+    @ApiOperation(value = "通过品牌id查询商品分类")
+    @GetMapping(value = "category/getByBrand")
+    public Result<List<CategoryEntity>> getByBrand(Integer brandId);
 }

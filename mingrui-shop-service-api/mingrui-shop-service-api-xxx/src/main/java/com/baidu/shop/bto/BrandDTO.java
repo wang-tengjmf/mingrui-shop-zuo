@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.nio.charset.Charset;
 
 
 /**
@@ -36,5 +37,6 @@ public class BrandDTO  extends BaseDTO {
     @ApiModelProperty(value = "品牌分类信息")
     @NotEmpty(message = "品牌分类信息不能为空",groups = {MingruiOperation.Add.class})
     private String categories;
+
 
 }
