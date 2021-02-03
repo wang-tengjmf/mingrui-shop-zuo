@@ -10,6 +10,7 @@ import com.baidu.shop.mapper.BrandMapper;
 import com.baidu.shop.mapper.CategoryBrandMapper;
 import com.baidu.shop.service.BrandService;
 import com.baidu.shop.utils.BaiduBeanUtil;
+import com.baidu.shop.utils.ObjectUtil;
 import com.baidu.shop.utils.PinyinUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -39,6 +40,9 @@ public class BrandServiceImpl extends BaseApiService implements BrandService{
 
     @Resource
     private CategoryBrandMapper categoryBrandMapper;
+
+
+
 
     @Override
     public Result<JsonObject> deleteBrandInfo(Integer id) {
@@ -79,6 +83,16 @@ public class BrandServiceImpl extends BaseApiService implements BrandService{
     public Result<List<BrandEntity>> getBrandInfoByCategoryId(Integer cid) {
         List<BrandEntity> list = brandMapper.getBrandInfoByCategoryId(cid);
         return this.setResultSuccess(list);
+    }
+
+    @Override
+    public Result<List<BrandEntity>> getBrandByCategory(Integer cid) {
+        if(ObjectUtil.isNotNull(cid)){
+            List<BrandEntity> list = brandMapper.getBrandByCategory(cid);
+            return this.setResultSuccess(list);
+        }
+        return null;
+
     }
 
     @Override
